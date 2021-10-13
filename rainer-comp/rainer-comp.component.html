@@ -1,0 +1,181 @@
+<head>
+
+    <!--<link rel="stylesheet" href="rainer-comp.component.css">-->
+    <!--ng add @ng-bootstrap/ng-bootstrap-->
+</head>
+
+<body style="min-width: 1900px;">
+    <header class="header">
+
+        <p
+            style="text-align: left;margin-top: 40px; margin-bottom: 20px; font-size: 60px; color: #003C8C; font-family:Calibri,'Gill Sans', 'Gill Sans MT',  'Trebuchet MS', sans-serif">
+            Smart Contract Tontinenrechner </p>
+        
+    </header>
+    <main style="text-align: left;">
+
+        <div class="card d-inline-flex p-2 bd-highlight"
+            style="width: 30%;height: 400px; margin-top: 5px; margin-left: 5px; margin-right: 5px;background: rgb(251  , 251, 251);">
+
+            <div class="card-body" >
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col-2" colspan="2" style="font-size: 23px; text-align: center;"><span><img
+                                        [src]="personUrl" class=" "
+                                        style="height: 80px; width: 80px; margin-right: 20px; ">Daten vom
+                                    Versicherungsnehmer</span> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Adresse:</td>
+                            <td>{{userAccount}}</td>
+                        </tr>
+                        <tr>
+                            <td>Geburtsjahr:</td>
+                            <td>{{Me.geburtsjahr}}</td>
+                        </tr>
+                        <tr>
+                            <td>Guthaben:</td>
+                            <td>{{balanceOfnum}} ETH</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Status:</td>
+                            <td>{{Me.statusToString}}</td>
+                        </tr>
+                        <tr>
+                            <td>Thesaurierung:</td>
+                            <td>{{thesaurierungToString}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="card d-inline-flex p-2 bd-highlight"
+            style="width: 30%; height: 400px; margin-top: 5px; margin-left: 5px; margin-right: 5px;background: rgb(251  , 251, 251);">
+
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col-2" colspan="2" style="font-size: 23px; text-align: center;"> <span><img
+                                        [src]="vertragUrl" class=""
+                                        style="height: 80px; width: 80px; margin-right: 20px;">Daten zum
+                                    Vertrag</span> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Deckungskapital:</td>
+                            <td>{{vertrag.deckungskapital[0]}} ETH</td>
+                        </tr>
+                        <tr>
+                            <td>Rentenhöhe:</td>
+                            <td>{{vertrag.rentenhoehe[0]}} ETH</td>
+                        </tr>
+                        <tr>
+                            <td>{{timeNextEventToString}} </td>
+                            <td>{{timeNextEventTage}} Tage </td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td>{{vertrag.statusVertragToString[0]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card d-inline-flex p-2 bd-highlight"
+            style="width: 30%; height: 400px; margin-top: 5px; margin-left: 5px; margin-right: 5px;background: rgb(251  , 251, 251);">
+
+
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col-2" colspan="2" style="font-size: 23px; text-align: center;"><span>
+                                <img [src]="kollektivUrl" class=""
+                                        style="height: 80px; width: 80px; margin-right: 20px;">Daten zum Kollektiv</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anzahl der Mitglieder:</td>
+                            <td>{{anzahlMitglieder}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gesamtguthaben:</td>
+                            <td>{{balanceOfAllnum}} ETH</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <br>
+        <br>
+ 
+     
+        <br>
+        <div class="d-flex justify-content-center">
+            <div  id="div-createPerson" class="input-group" style="width: 40%; margin-top: 5px;">
+                <span style="width: 100px;" class="input-group-text" id="addon-wrapping">Geburtsjahr:</span>
+                <input type="text" class="form-control" placeholder="Geburtsjahr " aria-label="Username"
+                    aria-describedby="addon-wrapping" (keyup)="onKey2($event)">
+                <button style="width: 160px;" type="button" class="btn btn-secondary" (click)="anlegenPerson()">Person anlegen</button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" >
+            <div class="input-group " style="width: 40%; margin-top: 5px; ">
+                <span style="width: 100px;" class="input-group-text" id="addon-wrapping">Betrag: </span>
+                <input type="text" class="form-control" placeholder="Wie viel ETH möchten Sie investieren"
+                    aria-label="Username" aria-describedby="addon-wrapping" (keyup)="onKey3($event)">
+                <button style="width: 160px;" type="button" class="btn btn-secondary" (click)="invest()">ETH einzahlen</button>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="input-group " style="width: 40%; margin-top: 5px; text-align: center;">
+                <span style="width: 100px;" class="input-group-text" id="addon-wrapping">Betrag: </span>
+                <input type="text" class="form-control" placeholder="Wie viel ETH möchten Sie abheben"
+                    aria-label="Username" aria-describedby="addon-wrapping" (keyup)="onKey4($event)">
+                <button style="width: 160px;" type="button" class="btn btn-secondary" (click)="withdraw()">Guthaben auszahlen</button>
+            </div>
+        </div>
+
+        
+        <br>
+        <br>
+
+
+        <div>
+            <button style="margin-right: 4px; margin-left: 4px;" type="button" class="btn btn-secondary"
+                (click)="giveLebendsnachweis()">sende
+                Lebensnachweis</button>
+            <button id="initializeVertrag-btn" style="margin-right: 4px; margin-left: 4px; display: none;" type="button" class="btn btn-secondary"
+                (click)="initializeVertrag()">initializeVertrag</button>
+            <button id="initializeYear-btn" style="margin-right: 4px; margin-left: 4px; display: none;" type="button" class="btn btn-secondary"
+                (click)="initializeYear()">initializeYear</button>
+            <button style="margin-right: 4px; margin-left: 4px;" type="button" class="btn btn-secondary"
+                (click)="getNumber()">Refresh</button>
+            <button style="margin-right: 4px; margin-left: 4px;" type="button" class="btn btn-secondary"
+                (click)="switchThesaurierung()">wechsel Thesaurierung</button>
+        </div>
+
+
+
+
+    </footer>
+
+
+
+</body>
